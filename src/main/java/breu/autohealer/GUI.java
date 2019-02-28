@@ -974,7 +974,6 @@ public class GUI extends javax.swing.JFrame {
     }
 
     static class healerThread extends Thread {
-
         int minMs = 80;
         int maxMs = 200;
 
@@ -1025,7 +1024,7 @@ public class GUI extends javax.swing.JFrame {
         public void run() {
             while (running) {
                 try {
-                    if (useHpPotion.isSelected()) {
+                    if (useHpPotion.isSelected() && hpPotBar != null && hpHotkey != null && hpPotionColor != null) {
                         if (robot.getPixelColor(hpPotBar.getX(), hpPotBar.getY()).getRGB() != hpPotionColor.getRGB()) {
                             actuate(hpHotkey.getX(), hpHotkey.getY());
 
@@ -1033,7 +1032,7 @@ public class GUI extends javax.swing.JFrame {
                         }
                     }
 
-                    if (useMpPotion.isSelected()) {
+                    if (useMpPotion.isSelected() && mpPotBar != null && mpHotkey != null && mpPotionColor != null) {
                         if (robot.getPixelColor(mpPotBar.getX(), mpPotBar.getY()).getRGB() != mpPotionColor.getRGB()) {
                             actuate(mpHotkey.getX(), mpHotkey.getY());
 
@@ -1041,7 +1040,7 @@ public class GUI extends javax.swing.JFrame {
                         }
                     }
 
-                    if (useHeal3.isSelected()) {
+                    if (useHeal3.isSelected() && heal3Bar != null && heal3Hotkey != null && heal3Color != null) {
                         if (robot.getPixelColor(heal3Bar.getX(), heal3Bar.getY()).getRGB() != heal3Color.getRGB()) {
                             actuate(heal3Hotkey.getX(), heal3Hotkey.getY());
 
@@ -1049,7 +1048,7 @@ public class GUI extends javax.swing.JFrame {
                         }
                     }
 
-                    if (useHeal2.isSelected()) {
+                    if (useHeal2.isSelected() && heal2Bar != null && heal2Hotkey != null && heal2Color != null) {
                         if (robot.getPixelColor(heal2Bar.getX(), heal2Bar.getY()).getRGB() != heal2Color.getRGB()) {
                             actuate(heal2Hotkey.getX(), heal2Hotkey.getY());
 
@@ -1057,7 +1056,7 @@ public class GUI extends javax.swing.JFrame {
                         }
                     }
 
-                    if (useHeal1.isSelected()) {
+                    if (useHeal1.isSelected() && heal1Bar != null && heal1Hotkey != null && heal1Color != null) {
                         if (robot.getPixelColor(heal1Bar.getX(), heal1Bar.getY()).getRGB() != heal1Color.getRGB()) {
                             actuate(heal1Hotkey.getX(), heal1Hotkey.getY());
 
@@ -1065,7 +1064,7 @@ public class GUI extends javax.swing.JFrame {
                         }
                     }
 
-                    if (useAmmo.isSelected()) {
+                    if (useAmmo.isSelected() && ammoPosition != null && ammoHotkey != null && ammoColor != null) {
                         if (robot.getPixelColor(ammoPosition.getX(), ammoPosition.getY()).getRGB() == ammoColor.getRGB()) {
                             actuate(ammoHotkey.getX(), ammoHotkey.getY());
 
@@ -1073,7 +1072,7 @@ public class GUI extends javax.swing.JFrame {
                         }
                     }
 
-                    if (useRing.isSelected()) {
+                    if (useRing.isSelected() && ringPosition != null && ringHotkey != null && ringColor != null) {
                         if (robot.getPixelColor(ringPosition.getX(), ringPosition.getY()).getRGB() == ringColor.getRGB()) {
                             actuate(ringHotkey.getX(), ringHotkey.getY());
 
@@ -1081,7 +1080,7 @@ public class GUI extends javax.swing.JFrame {
                         }
                     }
 
-                    if (useAmulet.isSelected()) {
+                    if (useAmulet.isSelected() && amuletPosition != null && amuletHotkey != null && amuletColor != null) {
                         if (robot.getPixelColor(amuletPosition.getX(), amuletPosition.getY()).getRGB() == amuletColor.getRGB()) {
                             actuate(amuletHotkey.getX(), amuletHotkey.getY());
 
