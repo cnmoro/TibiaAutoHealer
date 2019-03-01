@@ -24,6 +24,8 @@ public class GUI extends javax.swing.JFrame {
     static Coordinate ringHotkey;
     static Coordinate amuletHotkey;
 
+    static Coordinate burnManaHotkey;
+
     static Coordinate heal1Bar;
     static Coordinate heal2Bar;
     static Coordinate heal3Bar;
@@ -35,6 +37,8 @@ public class GUI extends javax.swing.JFrame {
     static Coordinate ringPosition;
     static Coordinate amuletPosition;
 
+    static Coordinate burnManaPosition;
+
     static Color heal1Color;
     static Color heal2Color;
     static Color heal3Color;
@@ -45,6 +49,8 @@ public class GUI extends javax.swing.JFrame {
     static Color ammoColor;
     static Color ringColor;
     static Color amuletColor;
+
+    static Color burnManaColor;
 
     static Robot robot;
 
@@ -127,6 +133,12 @@ public class GUI extends javax.swing.JFrame {
         ammoCoordinate = new javax.swing.JLabel();
         ringCoordinate = new javax.swing.JLabel();
         amuletCoordinate = new javax.swing.JLabel();
+        useBurnMana = new javax.swing.JCheckBox();
+        setHotkeyBurnMana = new javax.swing.JButton();
+        burnManaHKCoordinate = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        setPositionBurnMana = new javax.swing.JButton();
+        burnManaCoordinate = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tibia Auto Healer: Java Robot / Carlo Moro");
@@ -474,6 +486,44 @@ public class GUI extends javax.swing.JFrame {
         amuletCoordinate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         amuletCoordinate.setText("[x, y]");
 
+        useBurnMana.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        useBurnMana.setText("Burn Mana");
+        useBurnMana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                useBurnManaActionPerformed(evt);
+            }
+        });
+
+        setHotkeyBurnMana.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        setHotkeyBurnMana.setText("Set Hotkey");
+        setHotkeyBurnMana.setEnabled(false);
+        setHotkeyBurnMana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setHotkeyBurnManaActionPerformed(evt);
+            }
+        });
+
+        burnManaHKCoordinate.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        burnManaHKCoordinate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        burnManaHKCoordinate.setText("[x, y]");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel11.setText("at");
+
+        setPositionBurnMana.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        setPositionBurnMana.setText("Set MP Bar Position");
+        setPositionBurnMana.setActionCommand("Set MP Bar Position");
+        setPositionBurnMana.setEnabled(false);
+        setPositionBurnMana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setPositionBurnManaActionPerformed(evt);
+            }
+        });
+
+        burnManaCoordinate.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        burnManaCoordinate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        burnManaCoordinate.setText("[x, y]");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -493,9 +543,14 @@ public class GUI extends javax.swing.JFrame {
                                     .addComponent(useHeal2)
                                     .addComponent(useAmmo)
                                     .addComponent(useRing)
-                                    .addComponent(useAmulet))
+                                    .addComponent(useAmulet)
+                                    .addComponent(useBurnMana))
                                 .addGap(12, 12, 12)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(setHotkeyBurnMana)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(burnManaHKCoordinate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(setHotkeyAmulet)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -522,6 +577,30 @@ public class GUI extends javax.swing.JFrame {
                                             .addComponent(mpHKCoordinate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(setPositionAmmo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ammoCoordinate, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(setPositionRing, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ringCoordinate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(setPositionAmulet, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(amuletCoordinate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(setPositionBurnMana, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(burnManaCoordinate, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
@@ -550,25 +629,7 @@ public class GUI extends javax.swing.JFrame {
                                             .addComponent(mpBARCoordinate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(heal3BARCoordinate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(heal2BARCoordinate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(heal1BARCoordinate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(setPositionAmmo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(ammoCoordinate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(setPositionRing, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(ringCoordinate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(setPositionAmulet, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(amuletCoordinate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                            .addComponent(heal1BARCoordinate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -652,9 +713,17 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(setPositionAmulet)
                     .addComponent(amuletCoordinate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(useBurnMana)
+                    .addComponent(setHotkeyBurnMana)
+                    .addComponent(burnManaHKCoordinate)
+                    .addComponent(jLabel11)
+                    .addComponent(setPositionBurnMana)
+                    .addComponent(burnManaCoordinate))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
@@ -719,6 +788,7 @@ public class GUI extends javax.swing.JFrame {
             setHotkeyHeal1.setEnabled(true);
         } else {
             setHotkeyHeal1.setEnabled(false);
+            setPositionHeal1.setEnabled(false);
         }
     }//GEN-LAST:event_useHeal1ActionPerformed
 
@@ -777,6 +847,7 @@ public class GUI extends javax.swing.JFrame {
             setHotkeyHeal2.setEnabled(true);
         } else {
             setHotkeyHeal2.setEnabled(false);
+            setPositionHeal2.setEnabled(false);
         }
     }//GEN-LAST:event_useHeal2ActionPerformed
 
@@ -785,6 +856,7 @@ public class GUI extends javax.swing.JFrame {
             setHotkeyHeal3.setEnabled(true);
         } else {
             setHotkeyHeal3.setEnabled(false);
+            setPositionHeal3.setEnabled(false);
         }
     }//GEN-LAST:event_useHeal3ActionPerformed
 
@@ -793,6 +865,7 @@ public class GUI extends javax.swing.JFrame {
             setHotkeyHpPotion.setEnabled(true);
         } else {
             setHotkeyHpPotion.setEnabled(false);
+            setPositionHpPotion.setEnabled(false);
         }
     }//GEN-LAST:event_useHpPotionActionPerformed
 
@@ -801,6 +874,7 @@ public class GUI extends javax.swing.JFrame {
             setHotkeyMpPotion.setEnabled(true);
         } else {
             setHotkeyMpPotion.setEnabled(false);
+            setPositionMpPotion.setEnabled(false);
         }
     }//GEN-LAST:event_useMpPotionActionPerformed
 
@@ -851,6 +925,7 @@ public class GUI extends javax.swing.JFrame {
             setHotkeyAmmo.setEnabled(true);
         } else {
             setHotkeyAmmo.setEnabled(false);
+            setPositionAmmo.setEnabled(false);
         }
     }//GEN-LAST:event_useAmmoActionPerformed
 
@@ -859,6 +934,7 @@ public class GUI extends javax.swing.JFrame {
             setHotkeyRing.setEnabled(true);
         } else {
             setHotkeyRing.setEnabled(false);
+            setPositionRing.setEnabled(false);
         }
     }//GEN-LAST:event_useRingActionPerformed
 
@@ -867,6 +943,7 @@ public class GUI extends javax.swing.JFrame {
             setHotkeyAmulet.setEnabled(true);
         } else {
             setHotkeyAmulet.setEnabled(false);
+            setPositionAmulet.setEnabled(false);
         }
     }//GEN-LAST:event_useAmuletActionPerformed
 
@@ -896,6 +973,34 @@ public class GUI extends javax.swing.JFrame {
 
         setPositionAmulet.setEnabled(true);
     }//GEN-LAST:event_setHotkeyAmuletActionPerformed
+
+    private void useBurnManaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_useBurnManaActionPerformed
+        if (useBurnMana.isSelected()) {
+            setHotkeyBurnMana.setEnabled(true);
+        } else {
+            setHotkeyBurnMana.setEnabled(false);
+            setPositionBurnMana.setEnabled(false);
+        }
+    }//GEN-LAST:event_useBurnManaActionPerformed
+
+    private void setHotkeyBurnManaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setHotkeyBurnManaActionPerformed
+        JOptionPane.showMessageDialog(k, "Move mouse on top of hotkey for mana burn spell and press enter.");
+
+        burnManaHotkey = new Coordinate(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);
+        burnManaHKCoordinate.setText("[" + burnManaHotkey.getX() + ", " + burnManaHotkey.getY() + "]");
+
+        setPositionBurnMana.setEnabled(true);
+    }//GEN-LAST:event_setHotkeyBurnManaActionPerformed
+
+    private void setPositionBurnManaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setPositionBurnManaActionPerformed
+        JOptionPane.showMessageDialog(k, "Move mouse on top of mp bar position (spot should have mana) to use mana burn spell and press enter.");
+
+        burnManaPosition = new Coordinate(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);
+        burnManaCoordinate.setText("[" + burnManaPosition.getX() + ", " + burnManaPosition.getY() + "]");
+
+        JOptionPane.showMessageDialog(k, "Move mouse away and press enter.");
+        burnManaColor = robot.getPixelColor(burnManaPosition.getX(), burnManaPosition.getY());
+    }//GEN-LAST:event_setPositionBurnManaActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -974,11 +1079,12 @@ public class GUI extends javax.swing.JFrame {
     }
 
     static class healerThread extends Thread {
-        int minMs = 80;
-        int maxMs = 200;
 
-        int minimumInterval = 450;
-        int maximumInterval = 678;
+        int minMs = 27;
+        int maxMs = 54;
+
+        int minimumInterval = 281;
+        int maximumInterval = 406;
 
         public healerThread() {
         }
@@ -1024,67 +1130,101 @@ public class GUI extends javax.swing.JFrame {
         public void run() {
             while (running) {
                 try {
+                    boolean isLowPriority1 = true;
+                    boolean isLowPriority2 = true;
+                    boolean isLowPriority3 = true;
+
                     if (useHpPotion.isSelected() && hpPotBar != null && hpHotkey != null && hpPotionColor != null) {
                         if (robot.getPixelColor(hpPotBar.getX(), hpPotBar.getY()).getRGB() != hpPotionColor.getRGB()) {
                             actuate(hpHotkey.getX(), hpHotkey.getY());
+                            isLowPriority1 = false;
+                            isLowPriority2 = false;
+                            isLowPriority3 = false;
 
                             Thread.sleep(getRandomMilisecondsInRange(minimumInterval, maximumInterval));
                         }
                     }
 
-                    if (useMpPotion.isSelected() && mpPotBar != null && mpHotkey != null && mpPotionColor != null) {
-                        if (robot.getPixelColor(mpPotBar.getX(), mpPotBar.getY()).getRGB() != mpPotionColor.getRGB()) {
-                            actuate(mpHotkey.getX(), mpHotkey.getY());
+                    if (isLowPriority1) {
+                        if (useMpPotion.isSelected() && mpPotBar != null && mpHotkey != null && mpPotionColor != null) {
+                            if (robot.getPixelColor(mpPotBar.getX(), mpPotBar.getY()).getRGB() != mpPotionColor.getRGB()) {
+                                actuate(mpHotkey.getX(), mpHotkey.getY());
 
-                            Thread.sleep(getRandomMilisecondsInRange(minimumInterval, maximumInterval));
+                                Thread.sleep(getRandomMilisecondsInRange(minimumInterval, maximumInterval));
+                            }
                         }
                     }
 
-                    if (useHeal3.isSelected() && heal3Bar != null && heal3Hotkey != null && heal3Color != null) {
-                        if (robot.getPixelColor(heal3Bar.getX(), heal3Bar.getY()).getRGB() != heal3Color.getRGB()) {
-                            actuate(heal3Hotkey.getX(), heal3Hotkey.getY());
+                    if (isLowPriority1) {
+                        if (useHeal3.isSelected() && heal3Bar != null && heal3Hotkey != null && heal3Color != null) {
+                            if (robot.getPixelColor(heal3Bar.getX(), heal3Bar.getY()).getRGB() != heal3Color.getRGB()) {
+                                actuate(heal3Hotkey.getX(), heal3Hotkey.getY());
+                                isLowPriority2 = false;
+                                isLowPriority3 = false;
 
-                            Thread.sleep(getRandomMilisecondsInRange(minimumInterval, maximumInterval));
+                                Thread.sleep(getRandomMilisecondsInRange(minimumInterval, maximumInterval));
+                            }
                         }
                     }
 
-                    if (useHeal2.isSelected() && heal2Bar != null && heal2Hotkey != null && heal2Color != null) {
-                        if (robot.getPixelColor(heal2Bar.getX(), heal2Bar.getY()).getRGB() != heal2Color.getRGB()) {
-                            actuate(heal2Hotkey.getX(), heal2Hotkey.getY());
+                    if (isLowPriority2) {
+                        if (useHeal2.isSelected() && heal2Bar != null && heal2Hotkey != null && heal2Color != null) {
+                            if (robot.getPixelColor(heal2Bar.getX(), heal2Bar.getY()).getRGB() != heal2Color.getRGB()) {
+                                actuate(heal2Hotkey.getX(), heal2Hotkey.getY());
+                                isLowPriority3 = false;
 
-                            Thread.sleep(getRandomMilisecondsInRange(minimumInterval, maximumInterval));
+                                Thread.sleep(getRandomMilisecondsInRange(minimumInterval, maximumInterval));
+                            }
                         }
                     }
 
-                    if (useHeal1.isSelected() && heal1Bar != null && heal1Hotkey != null && heal1Color != null) {
-                        if (robot.getPixelColor(heal1Bar.getX(), heal1Bar.getY()).getRGB() != heal1Color.getRGB()) {
-                            actuate(heal1Hotkey.getX(), heal1Hotkey.getY());
+                    if (isLowPriority3) {
+                        if (useHeal1.isSelected() && heal1Bar != null && heal1Hotkey != null && heal1Color != null) {
+                            if (robot.getPixelColor(heal1Bar.getX(), heal1Bar.getY()).getRGB() != heal1Color.getRGB()) {
+                                actuate(heal1Hotkey.getX(), heal1Hotkey.getY());
 
-                            Thread.sleep(getRandomMilisecondsInRange(minimumInterval, maximumInterval));
+                                Thread.sleep(getRandomMilisecondsInRange(minimumInterval, maximumInterval));
+                            }
                         }
                     }
 
-                    if (useAmmo.isSelected() && ammoPosition != null && ammoHotkey != null && ammoColor != null) {
-                        if (robot.getPixelColor(ammoPosition.getX(), ammoPosition.getY()).getRGB() == ammoColor.getRGB()) {
-                            actuate(ammoHotkey.getX(), ammoHotkey.getY());
+                    if (isLowPriority1) {
+                        if (useAmmo.isSelected() && ammoPosition != null && ammoHotkey != null && ammoColor != null) {
+                            if (robot.getPixelColor(ammoPosition.getX(), ammoPosition.getY()).getRGB() == ammoColor.getRGB()) {
+                                actuate(ammoHotkey.getX(), ammoHotkey.getY());
 
-                            Thread.sleep(getRandomMilisecondsInRange(minimumInterval, maximumInterval));
+                                Thread.sleep(getRandomMilisecondsInRange(minimumInterval, maximumInterval));
+                            }
                         }
                     }
 
-                    if (useRing.isSelected() && ringPosition != null && ringHotkey != null && ringColor != null) {
-                        if (robot.getPixelColor(ringPosition.getX(), ringPosition.getY()).getRGB() == ringColor.getRGB()) {
-                            actuate(ringHotkey.getX(), ringHotkey.getY());
+                    if (isLowPriority1) {
+                        if (useRing.isSelected() && ringPosition != null && ringHotkey != null && ringColor != null) {
+                            if (robot.getPixelColor(ringPosition.getX(), ringPosition.getY()).getRGB() == ringColor.getRGB()) {
+                                actuate(ringHotkey.getX(), ringHotkey.getY());
 
-                            Thread.sleep(getRandomMilisecondsInRange(minimumInterval, maximumInterval));
+                                Thread.sleep(getRandomMilisecondsInRange(minimumInterval, maximumInterval));
+                            }
                         }
                     }
 
-                    if (useAmulet.isSelected() && amuletPosition != null && amuletHotkey != null && amuletColor != null) {
-                        if (robot.getPixelColor(amuletPosition.getX(), amuletPosition.getY()).getRGB() == amuletColor.getRGB()) {
-                            actuate(amuletHotkey.getX(), amuletHotkey.getY());
+                    if (isLowPriority1) {
+                        if (useAmulet.isSelected() && amuletPosition != null && amuletHotkey != null && amuletColor != null) {
+                            if (robot.getPixelColor(amuletPosition.getX(), amuletPosition.getY()).getRGB() == amuletColor.getRGB()) {
+                                actuate(amuletHotkey.getX(), amuletHotkey.getY());
 
-                            Thread.sleep(getRandomMilisecondsInRange(minimumInterval, maximumInterval));
+                                Thread.sleep(getRandomMilisecondsInRange(minimumInterval, maximumInterval));
+                            }
+                        }
+                    }
+
+                    if (isLowPriority1) {
+                        if (useBurnMana.isSelected() && burnManaPosition != null && burnManaHotkey != null && burnManaColor != null) {
+                            if (robot.getPixelColor(burnManaPosition.getX(), burnManaPosition.getY()).getRGB() == burnManaColor.getRGB()) {
+                                actuate(burnManaHotkey.getX(), burnManaHotkey.getY());
+
+                                Thread.sleep(getRandomMilisecondsInRange(minimumInterval, maximumInterval));
+                            }
                         }
                     }
 
@@ -1132,6 +1272,8 @@ public class GUI extends javax.swing.JFrame {
         ringHKCoordinate.setText("[x, y]");
         amuletHKCoordinate.setText("[x, y]");
 
+        burnManaHKCoordinate.setText("[x, y]");
+
         heal1BARCoordinate.setText("[x, y]");
         heal2BARCoordinate.setText("[x, y]");
         heal3BARCoordinate.setText("[x, y]");
@@ -1142,6 +1284,8 @@ public class GUI extends javax.swing.JFrame {
         ammoCoordinate.setText("[x, y]");
         ringCoordinate.setText("[x, y]");
         amuletCoordinate.setText("[x, y]");
+
+        burnManaCoordinate.setText("[x, y]");
 
         timeInterval.setText("1000");
 
@@ -1156,6 +1300,8 @@ public class GUI extends javax.swing.JFrame {
         useRing.setSelected(false);
         useAmulet.setSelected(false);
 
+        useBurnMana.setSelected(false);
+
         setHotkeyHeal1.setEnabled(false);
         setHotkeyHeal2.setEnabled(false);
         setHotkeyHeal3.setEnabled(false);
@@ -1166,6 +1312,8 @@ public class GUI extends javax.swing.JFrame {
         setHotkeyAmmo.setEnabled(false);
         setHotkeyRing.setEnabled(false);
         setHotkeyAmulet.setEnabled(false);
+
+        setHotkeyBurnMana.setEnabled(false);
 
         setPositionHeal1.setEnabled(false);
         setPositionHeal2.setEnabled(false);
@@ -1178,6 +1326,8 @@ public class GUI extends javax.swing.JFrame {
         setPositionRing.setEnabled(false);
         setPositionAmulet.setEnabled(false);
 
+        setPositionBurnMana.setEnabled(false);
+
         stopActions.setEnabled(false);
         startActions.setEnabled(true);
     }
@@ -1187,6 +1337,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel ammoHKCoordinate;
     private javax.swing.JLabel amuletCoordinate;
     private javax.swing.JLabel amuletHKCoordinate;
+    private javax.swing.JLabel burnManaCoordinate;
+    private javax.swing.JLabel burnManaHKCoordinate;
     private javax.swing.JLabel heal1BARCoordinate;
     private javax.swing.JLabel heal1HKCoordinate;
     private javax.swing.JLabel heal2BARCoordinate;
@@ -1197,6 +1349,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel hpHKCoordinate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1213,6 +1366,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel ringHKCoordinate;
     private javax.swing.JButton setHotkeyAmmo;
     public static javax.swing.JButton setHotkeyAmulet;
+    public static javax.swing.JButton setHotkeyBurnMana;
     private javax.swing.JButton setHotkeyHeal1;
     private javax.swing.JButton setHotkeyHeal2;
     private javax.swing.JButton setHotkeyHeal3;
@@ -1221,6 +1375,7 @@ public class GUI extends javax.swing.JFrame {
     public static javax.swing.JButton setHotkeyRing;
     private javax.swing.JButton setPositionAmmo;
     private javax.swing.JButton setPositionAmulet;
+    private javax.swing.JButton setPositionBurnMana;
     private javax.swing.JButton setPositionHeal1;
     private javax.swing.JButton setPositionHeal2;
     private javax.swing.JButton setPositionHeal3;
@@ -1233,6 +1388,7 @@ public class GUI extends javax.swing.JFrame {
     public static javax.swing.JTextField timeInterval;
     public static javax.swing.JCheckBox useAmmo;
     public static javax.swing.JCheckBox useAmulet;
+    public static javax.swing.JCheckBox useBurnMana;
     public static javax.swing.JCheckBox useHeal1;
     public static javax.swing.JCheckBox useHeal2;
     public static javax.swing.JCheckBox useHeal3;
